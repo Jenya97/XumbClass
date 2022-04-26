@@ -1,17 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import City from './City';
-import Gyumri from './99.jpg';
-import {ReactComponent as ReactLogo} from './logo.svg'
+import FuncComp from "./FuncComp";
+import Menu from "./Menu";
 
 function App() {
   return (
-    <div className="App">
-   <City name='Gyumri' src={Gyumri}/>
-   <City name='Erevan' src={logo}/>
-   <City name='Hoktemberyan'  src='img/hh.jpg'/>
-   <City name='Vanadzor'  src='img/hh.jpg'/>
-   <ReactLogo/>
+    <div>
+      <FuncComp name="one" color="red"/> 
+      <FuncComp name="two" color="blue"/> 
+      <FuncComp name="three" color="grey"/> 
+      <FuncComp name="four" color="pink"/> 
+      <Menu/>
     </div>
   );
 }
