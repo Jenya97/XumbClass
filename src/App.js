@@ -1,15 +1,20 @@
 import FuncComp from "./FuncComp";
 import Menu from "./Menu";
-
+import Page1 from "./Pages/Page1";
+import UseEffectExample from "./UseEffectExample";
+import {useState} from 'react';
+import {Context} from './Context'
 function App() {
+  const [color,setColor]=useState('pink')
+  const [counter,setCounter]=useState(10)
   return (
-    <div>
-      <FuncComp name="one" color="red"/> 
-      <FuncComp name="two" color="blue"/> 
-      <FuncComp name="three" color="grey"/> 
-      <FuncComp name="four" color="pink"/> 
-      <Menu/>
-    </div>
+    <>
+    <button onClick={()=>setColor('green')}>green</button>
+    <button onClick={()=>setCounter(counter+1)}>add</button>
+    <Context.Provider value={{color,counter}} >
+      <Page1/>
+    </Context.Provider>
+    </>
   );
 }
 
