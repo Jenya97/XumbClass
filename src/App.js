@@ -1,19 +1,44 @@
-import FuncComp from "./FuncComp";
-import Menu from "./Menu";
-import Page1 from "./Pages/Page1";
-import UseEffectExample from "./UseEffectExample";
-import {useState} from 'react';
-import {Context} from './Context'
+import React, { useState, useReducer, useEffect } from "react";
+import ContextTwo from "./ContextTwo";
+import Example from "./Example";
+import { reducer } from "./reducer";
+
 function App() {
-  const [color,setColor]=useState('pink')
-  const [counter,setCounter]=useState(10)
+  // const [count,setCount]=useState(0)
+  const [count1,dispatch]=useReducer(reducer,80)
+//   const [user, dispatch] = useReducer(reducer, []);
+//   const [name, setName] = useState(null);
+  const [number,setNumber]=useState('')
+ 
+  // function add(){
+  //     setCount(count+2)
+  // }
+//   useEffect(() => {
+//     if (name) {
+//       dispatch({
+//         type: "ADD",
+//         payload: name,
+//       });
+//     }
+//   }, [name]);
+
   return (
+    //   <ContextTwo.Provider value={{count,add}}>
+    //   <Example/>
+    //   </ContextTwo.Provider>
     <>
-    <button onClick={()=>setColor('green')}>green</button>
-    <button onClick={()=>setCounter(counter+1)}>add</button>
-    <Context.Provider value={{color,counter}} >
-      <Page1/>
-    </Context.Provider>
+      <p>{count1}</p>
+    <button onClick={()=>dispatch({
+                        type:'INCREMENT',
+                        payload:number
+                        })}>+</button>
+    <button onClick={()=>dispatch({type:'DECREMENT', payload:number})}>-</button>
+    <button onClick={()=>dispatch({type:'RESET'})}>0</button>
+     <button onClick={() => setNumber(prompt())}>tiv</button>
+      {/* <button onClick={() => setName(prompt())}></button>
+        {user && user.map(i=>(
+          <p key={i.id}>{i.name}</p>
+      ))} */}
     </>
   );
 }
