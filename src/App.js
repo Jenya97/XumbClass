@@ -1,28 +1,24 @@
-import About from "./Component/Pages/About";
-import Contact from "./Component/Pages/Contact";
-import Blog from "./Component/Pages/Blog";
-import Home from "./Component/Pages/Home";
-import Error from "./Component/Error";
-import { Routes, Route } from "react-router-dom";
-import Layout from "./Component";
-import SinglePost from "./Component/SinglePost";
-import "./App.css";
+import useToggle from "./CustomHook/useToggle";
+import useFetch from "./CustomHook/useFetch";
+import ReactLoading from 'react-loading';
+import React from 'react'
 
-function App() {
+export default function App() {
+    const [visible,toggleVisibility]=useToggle(true)
+    const res=useFetch('https://jsonplaceholder.typicode.com/users');
+    
+    if(!res.response){
+      return  <ReactLoading color={'blue'} height={'20%'} width={'20%'} />
+    }
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout/>}>
-        <Route index path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="blog/:id" element={<SinglePost />} />
-        <Route path="*"   element={<Error/>}/>
-        </Route>
-      </Routes>
-    </>
-  );
+    <div>
+        {
+         visible &&  <h2>custom hook</h2>
+        }
+        <button onClick={toggleVisibility}>toogle</button>
+        {res && res.response.map(i=>(
+            <li key={i.id}>{i.name}</li>
+        ))}
+    </div>
+  )
 }
-
-export default App;
